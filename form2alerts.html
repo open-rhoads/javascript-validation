@@ -1,0 +1,161 @@
+
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Validate me</title>
+
+<!--
+<script>
+
+	/* function validateForm below will loop through the form fields in the first form.
+	Using the DOM/dynamic selection methods throughout, it will check that a value has
+	been entered by the user in each field type. 
+	If the user has not entered a value for any of the form fields, the function will return
+	an error message asking the user to enter a value in that field name.
+	*/
+	function validateForm()
+	{
+	
+	//loop through all elements/fields in the first form within the document
+		for (var i=0;i<(document.forms[0].elements.length);i++){
+			
+			//conditional logic to determine whether the contextual element (i) is NOT a submit button
+			//If it is not (aka any other form type), then create a variable/object for the error message 
+			//(array object) w/ element names and error text
+			//AND continue on with logic to validate specific types
+			if (document.forms[0].elements[i].type != 'submit'){
+			
+				var errorMessage = document.forms[0].elements[i].name + "_validation_error";
+			
+			
+				//conditional logic to determine whether the user entered a string of nothing, in any non-submit field.
+				//If so, display error message by pulling the variable/object created/named previously & manipulate with DOM
+				if (document.forms[0].elements[i].value == ''){
+				
+					let fieldName = document.forms[0].elements[i].name;
+					document.getElementById(errorMessage).innerHTML = 'Please enter a value for ' + fieldName[i];
+					document.getElementById(errorMessage).style.color = '#8B0000';
+					document.getElementById(errorMessage).focus();
+				
+				console.log(errorMessage);
+				
+				}
+			
+			
+			
+				//otherwise (if they entered any value), pull the error message object/variable and put nothing in it
+				else {
+					document.getElementById(errorMessage).innerHTML = '';
+				}	
+				
+				//conditional logic to determine whether the contextual element (i) is a radio button
+				//If so, assign a Boolean variable with a value of false
+				//Store the names of each radio button in an array (won't they be the same...?)
+				//Store a constant of the length of that array (# of radio buttons)
+				//Store the entire array in a variable
+				//All to be refered to later in a loop through the radio buttons
+				if (document.forms[0].elements[i].type == 'radio'){
+					
+					let radioButton = false;
+					let fieldNames = document.forms[0].elements[i].name;
+					const radiosLength = document.getElementsByName(fieldNames).length;
+					let namesObject = document.getElementsByName(fieldNames);
+					
+					//Loop through the previously created array of radio buttons
+					//For each one, check if it is checked.
+					//If even one is, then the Boolean marker variable will turn True 
+					//and no message will display on submit
+					//If none are checked, message displays
+					for (var j=0;j<radiosLength;j++){
+						if (namesObject[j].checked == true){
+						
+						radioButton = true;
+						}
+					}
+					
+					if (radioButton == false){
+					
+						document.getElementById(errorMessage).innerHTML = 'Please enter a value for ' + fieldNames[j];
+						document.getElementById(errorMessage).style.color = '#8B0000';
+						document.getElementById(errorMessage).focus();
+					}
+					
+					else{
+					
+						document.getElementById(errorMessage).innerHTML = '';
+					}
+				}
+				
+				//Similar logic as for radio buttons above, but for checkboxes instead
+				if (document.forms[0].elements[i].type == 'checkbox'){
+				
+					let isChecked = false;
+					let fieldNames = document.forms[0].elements[i].name;
+					const checksLength = document.getElementsByName(fieldNames).length;
+					let namesObject = document.getElementsByName(fieldNames);
+					
+					for (var j=0;j<checksLength;j++){
+						if (namesObject[j].checked == true){
+							isChecked = true;
+						}
+					}
+					
+					if (isChecked == false){
+						
+						document.getElementById(errorMessage).innerHTML = 'Please enter a value for ' + fieldNames[j];
+						document.getElementById(errorMessage).style.color = '#8B0000';
+						document.getElementById(errorMessage).focus();
+					}
+					
+					else{
+					
+						document.getElementById(errorMessage).innerHTML = '';
+					}
+				}
+			}
+			
+		}
+	}
+
+
+</script>
+-->
+
+</head>
+<body>
+At lease one piece of data has to come in from every input type.
+<form action = "form.html" method = "get"><br/>
+Name:<input type = "text" name = "fullname" placeholder="Enter Full Name"/><br/>
+Gender:<br/>
+Male<input type = "radio" name = "gender" value="male"/>Female<input type = "radio" name = "gender" value="female"/><br/>
+Hobbies<br/>
+Baseball <input type = "checkbox" name = "hobbies" value = "baseball" />  
+Football <input type = "checkbox" name = "hobbies" value = "football" />  
+Hockey <input type = "checkbox" name = "hobbies" value = "hockey" /><br/>
+Favorite Show <select name = "show">
+<option value = "">Choose Below</option>
+<option value = "ATHF">Aqua Teen Hunger Force</option>
+<option value = "Family Guy">Family Guy</option>
+<option value = "Simpsons">Simpsons</option>
+</select><br/>
+Comments<br/>
+<textarea cols = "50" rows = "6" name = "comments">Enter Comments</textarea><br/>
+
+
+<script src="javascript.js">
+
+
+</script>
+
+<!-- Event that fires below calls the JavaScript function above
+and returns false/does not re-load, if the user has left any fields blank -->
+
+<input type = "submit" name = "submit" value = "enter me" onClick="event.preventDefault(); validateForm();" />
+</form>
+<script>
+console.log(document.forms);
+</script>
+</form>
+</body>
+</html>
