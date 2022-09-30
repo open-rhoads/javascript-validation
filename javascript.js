@@ -3,9 +3,6 @@
 	been entered by the user in each field type. 
 	If the user has not entered a value for any of the form fields, the function will return
 	an error message asking the user to enter a value in that field name.
-	This version uses alerts, which I saw in my testing does not produce the best user experience,
-	but because I could not figure out my Uncaught Type Error from the innerHTML in my other version
-	I'm including this to show that the rest of my logic works
 	*/
 	function validateForm()
 	{
